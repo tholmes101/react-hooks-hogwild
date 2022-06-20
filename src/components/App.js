@@ -10,17 +10,26 @@ import Filter from "./Filter";
 
 
 function App() {
-
+	const [showGreased, setShowGreased] = useState(false)
+	const [sortBy, setSortby] = useState("");
 	const[hogs, setHogs] = useState(hogdata)
 	const[currentHog, setCurrentHog] = useState(hogs[0])
 	console.log(hogs)
+	 
+	function handleSetShowGreased(){
+		setShowGreased(!showGreased)
+	}
+
+	function handleSetSort(e) {
+		setSortby(e.target.textContent);
+	}
 
 	return (
 		<div className="App">
-			<Nav />
-			<InfoBar hog={currentHog}/>
+			<Nav handleSetShowGreased={handleSetShowGreased} handleSetSort={handleSetSort}/>
+			<InfoBar hogData={currentHog}/>
 			<Filter/>
-			<HogCardArea hogs={hogs} setCurrentHog={setCurrentHog}/>
+			<HogCardArea showGreased={showGreased}hogData={hogs} sortBy={sortBy}/>
 
 		</div>
 	);

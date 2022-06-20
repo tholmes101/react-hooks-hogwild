@@ -1,15 +1,37 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { Card, Image } from 'semantic-ui-react'
 
 
-const HogCard = ({hog, setCurrentHog}) => {
+
+function HogCard ({hog,name,image,greased,specialty,highestMedal,weight, setCurrentHog}) {      
+    const [showData, setShowData] = useState(false)
+
+        function handleToggleData () {
+            setShowData(oldState => !oldState)
+
+        }
+
+        function renderDetails () {
+            return (
+            <>
+            <div className='specialty'>Specialty: {specialty}</div>
+            <div className='highestMedal'>Highest Medal: {highestMedal}</div>
+            <div className='weight'>Weight: {weight}</div>
+            <div className='greased'>Greased: {greased ? 'Yes': 'No'}</div>
+            </>
+            )
+        }
     return (
-        <div
-            onClick={() =>{setCurrentHog(hog)}} className='pigTile'>
-            <img src={hog.image} alt='a hog'/>
-            <h3 className='name'>{hog.name}</h3>
+    
+         <Card color="pink" onClick={handleToggleData}>
+            <Image src={image} wrapped ul={false} />
+            <Card.Content>
+                <Card.Header>{name}</Card.Header>
+                {showData ? renderDetails() : null}
+            </Card.Content>
+        </Card>
 
-        </div>
+        
     )
 }
-
 export default HogCard
